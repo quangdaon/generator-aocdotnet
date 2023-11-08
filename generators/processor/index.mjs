@@ -1,36 +1,44 @@
-'use strict';
-import Generator from 'yeoman-generator';
-import yosay from 'yosay';
+"use strict";
+import Generator from "yeoman-generator";
 
 export default class extends Generator {
-  prompting() {
-    // Have Yeoman greet the user.
-    this.log(
-      yosay(
-        `Welcome to the bedazzling 'generator-aocdotnet' generator!`
-      )
-    );
+  constructor(args, opts) {
+    super(args, opts);
 
-    const prompts = [
-      {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
-      }
-    ];
+    this.argument("year", {
+      alias: "y",
+      type: Number,
+      required: true
+    });
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
+    this.argument("day", {
+      alias: "d",
+      type: Number,
+      required: true
     });
   }
 
   writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+    const year =
+      this.options.year > 1000 ? this.options.year : this.options.year + 2000;
+    const day = this.options.day;
+    const dayFormatted = day.toString().padStart(2, "0");
+
+    const appname = "AdventOfCode.App";
+    const processorPath = `${appname}/Challenges/${year}/Day${dayFormatted}Processor.cs`;
+    const processorTestPath = `${appname}.Tests/Challenges/${year}/Day${dayFormatted}ProcessorTests.cs`;
+
+    const data = { year, day, dayFormatted };
+
+    this.fs.copyTpl(
+      this.templatePath("Processor.cs"),
+      this.destinationPath(processorPath),
+      data
+    );
+    this.fs.copyTpl(
+      this.templatePath("ProcessorTests.cs"),
+      this.destinationPath(processorTestPath),
+      data
     );
   }
-
-};
+}
