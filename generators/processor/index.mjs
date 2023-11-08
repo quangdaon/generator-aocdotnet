@@ -1,14 +1,13 @@
 'use strict';
-const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
+import Generator from 'yeoman-generator';
+import yosay from 'yosay';
 
-module.exports = class extends Generator {
+export default class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
       yosay(
-        `Welcome to the bedazzling ${chalk.red('generator-aocdotnet')} generator!`
+        `Welcome to the bedazzling 'generator-aocdotnet' generator!`
       )
     );
 
@@ -34,7 +33,4 @@ module.exports = class extends Generator {
     );
   }
 
-  install() {
-    this.installDependencies();
-  }
 };
