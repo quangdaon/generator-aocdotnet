@@ -5,9 +5,9 @@ namespace AdventOfCode.App.Tests.Challenges;
 
 public class Aoc<%= year %>Day<%= dayFormatted %>ProcessorTest : ChallengeProcessorTests
 {
-  private readonly Aoc<%= year %>Day<%= dayFormatted %>Processor processor;
+  private readonly Aoc<%= year %>Day<%= dayFormatted %>Processor _processor;
   public Aoc<%= year %>Day<%= dayFormatted %>ProcessorTest() : base(<%= year %>, <%= day %>)
   {
-    processor = new Aoc<%= year %>Day<%= dayFormatted %>Processor();
+    _processor = new Aoc<%= year %>Day<%= dayFormatted %>Processor();
   }
 }
