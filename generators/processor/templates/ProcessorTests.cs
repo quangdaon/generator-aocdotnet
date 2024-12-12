@@ -21,7 +21,6 @@ public class Aoc<%= year %>Day<%= dayFormatted %>ProcessorTest : ChallengeProces
     Assert.Equal("???", result);
   }
 
-
   [Fact]
   public void ProcessPart2Solution_GivenSampleInputs_ReturnsProvidedResult()
   {
